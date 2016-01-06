@@ -14,6 +14,10 @@ describe("Thermostat", function() {
     it("initializes with power saving mode on", function(){
       expect(thermostat.powerSave).toBe(true);
     });
+
+    it("initializes with currentColor set to green", function(){
+      expect(thermostat.currentColor).toEqual('green');
+    });
   });
 
   describe("#Increase", function() {
@@ -27,9 +31,19 @@ describe("Thermostat", function() {
       }
       expect(function(){thermostat.increase();}).toThrow(new Error("Can't go higher: 25 degrees is the maximum temperature on power save!"));
     });
+
+    it("prevents temperature from exceeding 32 degrees without powersave", function() {
+      thermostat.switchMode();
+      for(var i = 0; i < 12; i++) {
+        thermostat.increase();
+      }
+      expect(function() {
+        thermostat.increase();
+      }).toThrow(new Error("Cannot exceed 32 degrees"));
+    });
   });
 
-  describe("#Decrease", function() {
+  describe("#decrease", function() {
     it("decreases temperature of 1 degree with decrease button", function(){
       expect(thermostat.decrease()).toEqual(19);
     });
@@ -42,4 +56,20 @@ describe("Thermostat", function() {
     });
   });
 
+  describe("#reset", function() {
+    it("allows user to reset temp to 20 degrees by hitting the reset button", function() {
+      thermostat.increase();
+      thermostat.reset();
+      expect(thermostat.temp).toEqual(20);
+    });
+  });
+
+  describe('#checkColor', function(){
+    it("changes currentColor to blue when temp equals 18 or less", function(){
+      for(var i = 0; i < 3; i++) {
+        thermostat.decrease();
+      }
+      expect(thermostat.currentColor).toEqual('blue');
+    });
+  });
 });
