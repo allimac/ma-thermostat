@@ -71,5 +71,20 @@ describe("Thermostat", function() {
       }
       expect(thermostat.currentColor).toEqual('blue');
     });
+
+    it("changes currentColor to red when temp is higher than 25", function() {
+      thermostat.switchMode();
+      for(var x = 0; x < 10; x++) {
+        thermostat.increase();
+      }
+      expect(thermostat.currentColor).toEqual('red');
+    });
+
+    it("currentColor is green when temp is between 18 and 25", function() {
+      for(var x = 0; x < 2; x++) {
+        thermostat.increase();
+      }
+      expect(thermostat.currentColor).toEqual('green');
+    });
   });
 });

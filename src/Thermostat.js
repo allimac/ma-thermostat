@@ -8,7 +8,9 @@ function Thermostat() {
 Thermostat.prototype.increase = function () {
   if (!this.powerSave && this.temp >= 32) throw new Error("Cannot exceed 32 degrees");
   if (this.powerSave && this.temp >= 25 ) throw new Error("Can't go higher: 25 degrees is the maximum temperature on power save!");
-  return this.temp += 1;
+  this.temp += 1;
+  this.changeColor();
+  return this.temp;
 };
 
 Thermostat.prototype.decrease = function () {
@@ -34,5 +36,9 @@ Thermostat.prototype.reset = function() {
 Thermostat.prototype.changeColor = function() {
   if (this.temp <= 18) {
     this.currentColor = this.colorOption[0];
+  } else if (this.temp > 25) {
+    this.currentColor = this.colorOption[2];
+  } else {
+    this.currentColor = this.colorOption[1];
   }
 };
