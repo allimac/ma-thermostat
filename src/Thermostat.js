@@ -1,8 +1,13 @@
 function Thermostat() {
   this.temp = 20;
+  this.MIN_TEMP = 10;
   this.powerSave = true;
   this.colorOption = ['blue', 'green', 'red'];
 }
+
+Thermostat.prototype.getTemp = function () {
+  return this.temp;
+};
 
 Thermostat.prototype.increase = function () {
   if (!this.powerSave && this.temp >= 32) throw new Error("Cannot exceed 32 degrees");
@@ -12,8 +17,7 @@ Thermostat.prototype.increase = function () {
 };
 
 Thermostat.prototype.decrease = function () {
-  var MIN_TEMP = 10;
-  if (this.temp <= MIN_TEMP ) throw new Error("Can't go below: 10 degrees is the minimum temperature!");
+  if (this.temp <= this.MIN_TEMP ) throw new Error("Can't go below: 10 degrees is the minimum temperature!");
   this.temp -= 1;
   return this.temp;
 };

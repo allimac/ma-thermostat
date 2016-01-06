@@ -10,7 +10,7 @@ describe("User Stories", function() {
 
       // Thermostat starts at 20 degrees
       it("initializes at 20 degrees", function(){
-        expect(thermostat.temp).toEqual(20);
+        expect(thermostat.getTemp()).toEqual(20);
       });
 
       // Power saving mode is on by default
@@ -66,7 +66,7 @@ describe("User Stories", function() {
     it("allows user to reset temp to 20 degrees by hitting the reset button", function() {
       thermostat.increase();
       thermostat.reset();
-      expect(thermostat.temp).toEqual(20);
+      expect(thermostat.getTemp()).toEqual(20);
     });
 
 
