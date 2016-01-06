@@ -23,11 +23,7 @@ Thermostat.prototype.decrease = function () {
 };
 
 Thermostat.prototype.switchMode = function() {
-  if(this.powerSave) {
-    this.powerSave = false;
-  } else {
-    this.powerSave = true;
-  }
+  this.powerSave = !this.powerSave;
 };
 
 Thermostat.prototype.reset = function() {
