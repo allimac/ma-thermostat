@@ -73,15 +73,15 @@ describe("User Stories", function() {
     // The thermostat should colour the display based on energy usage - < 18 is green, < 25 is yellow, otherwise red
     it("changes colors depending on current temperature", function() {
       thermostat.switchMode();
-      expect(thermostat.currentColor).toEqual('green');
+      expect(thermostat.colorCheck()).toEqual('green');
       for(var i = 0; i < 3; i++) {
         thermostat.decrease();
       }
-      expect(thermostat.currentColor).toEqual('blue');
+      expect(thermostat.colorCheck()).toEqual('blue');
       for(var x = 0; x < 10; x++) {
         thermostat.increase();
       }
-      expect(thermostat.currentColor).toEqual('red');
+      expect(thermostat.colorCheck()).toEqual('red');
     });
   });
 

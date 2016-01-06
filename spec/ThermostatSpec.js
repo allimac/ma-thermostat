@@ -16,7 +16,7 @@ describe("Thermostat", function() {
     });
 
     it("initializes with currentColor set to green", function(){
-      expect(thermostat.currentColor).toEqual('green');
+      expect(thermostat.colorCheck()).toEqual('green');
     });
   });
 
@@ -64,12 +64,12 @@ describe("Thermostat", function() {
     });
   });
 
-  describe('#checkColor', function(){
+  describe('#colorCheck', function(){
     it("changes currentColor to blue when temp equals 18 or less", function(){
       for(var i = 0; i < 3; i++) {
         thermostat.decrease();
       }
-      expect(thermostat.currentColor).toEqual('blue');
+      expect(thermostat.colorCheck()).toEqual('blue');
     });
 
     it("changes currentColor to red when temp is higher than 25", function() {
@@ -77,14 +77,14 @@ describe("Thermostat", function() {
       for(var x = 0; x < 10; x++) {
         thermostat.increase();
       }
-      expect(thermostat.currentColor).toEqual('red');
+      expect(thermostat.colorCheck()).toEqual('red');
     });
 
     it("currentColor is green when temp is between 18 and 25", function() {
       for(var x = 0; x < 2; x++) {
         thermostat.increase();
       }
-      expect(thermostat.currentColor).toEqual('green');
+      expect(thermostat.colorCheck()).toEqual('green');
     });
   });
 });
