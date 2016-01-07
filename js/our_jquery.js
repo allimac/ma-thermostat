@@ -5,13 +5,11 @@ $(document).ready(function() {
 
 function getLocation(){
   var deferred = $.Deferred();
-
   $.getJSON('https://freegeoip.net/json/').done(function(location) {
     userCity = location.city;
   }, function(){
     deferred.resolve();
   });
-
   return deferred.promise();
 }
 
@@ -21,12 +19,12 @@ function getWeather(){
     $( "#outsideTemp" ).text(Math.floor(data.main.temp));
     $( "#weatherCondition" ).text(data.weather[0].main);
     $("#city").text(userCity);
-  });
-}
+    });
+  }
 
-getLocation().done(function(){
-  getWeather();
-});
+  getLocation().done(function(){
+    getWeather();
+  });
 
   $("#increaseTemp").click(function() {
     thermy.increaseTemp();
