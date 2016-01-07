@@ -12,79 +12,73 @@ describe("Thermostat", function() {
     });
 
     it("initializes with power saving mode on", function(){
-      expect(thermostat.powerSave).toBe(true);
-    });
-
-    it("initializes with currentColor set to green", function(){
-      expect(thermostat.colorCheck()).toEqual('green');
+      expect(thermostat.powerSaveMode).toBe(true);
     });
   });
 
   describe("#Increase", function() {
     it("increases temperature of 1 degree with increase button", function(){
-      expect(thermostat.increase()).toEqual(21);
+      expect(thermostat.increaseTemp()).toEqual(21);
     });
 
     it("prevents to increase temperature if it's higher than 25 (with power saving mode)", function(){
-      for (var i = 1; i <= 5; i++) {
-        thermostat.increase();
+      for (var i = 0; i < 5; i++) {
+        thermostat.increaseTemp();
       }
-      expect(function(){thermostat.increase();}).toThrow(new Error("Can't go higher: 25 degrees is the maximum temperature on power save!"));
+      expect(function(){thermostat.increaseTemp();}).toThrow(new Error("Cannot exceed 25 degrees"));
     });
 
     it("prevents temperature from exceeding 32 degrees without powersave", function() {
-      thermostat.switchMode();
+      thermostat.switchPowerSaveMode();
       for(var i = 0; i < 12; i++) {
-        thermostat.increase();
+        thermostat.increaseTemp();
       }
-      expect(function() {
-        thermostat.increase();
-      }).toThrow(new Error("Cannot exceed 32 degrees"));
+      expect(function() { thermostat.increaseTemp(); }).toThrow(new Error("Cannot exceed 32 degrees"));
     });
   });
 
   describe("#decrease", function() {
     it("decreases temperature of 1 degree with decrease button", function(){
-      expect(thermostat.decrease()).toEqual(19);
+      expect(thermostat.decreaseTemp()).toEqual(19);
     });
 
     it("prevents to decrease temperature if it's lower than 10", function(){
-      for (var i = 1; i <= 10; i++) {
-        thermostat.decrease();
+      for (var i = 0; i < 10; i++) {
+        thermostat.decreaseTemp();
       }
-      expect(function(){thermostat.decrease();}).toThrow(new Error("Can't go below: 10 degrees is the minimum temperature!"));
+      expect(function(){thermostat.decreaseTemp();}).toThrow(new Error("Can't go below 10 degrees!"));
     });
   });
 
   describe("#reset", function() {
     it("allows user to reset temp to 20 degrees by hitting the reset button", function() {
-      thermostat.increase();
-      thermostat.reset();
+      thermostat.increaseTemp();
+      thermostat.resetTemp();
       expect(thermostat.getTemp()).toEqual(20);
     });
   });
 
-  describe('#colorCheck', function(){
-    it("changes currentColor to blue when temp equals 18 or less", function(){
+  describe('#energyUsage', function(){
+    it("energyUsage is 'low' when temp equals 18 or less", function(){
       for(var i = 0; i < 3; i++) {
-        thermostat.decrease();
+        thermostat.decreaseTemp();
       }
-      expect(thermostat.colorCheck()).toEqual('blue');
+      expect(thermostat.energyUsage()).toEqual('low-usage');
     });
 
-    it("changes currentColor to red when temp is higher than 25", function() {
-      thermostat.switchMode();
+    it("energyUsage is 'high' when temp is higher than 25", function() {
+      thermostat.switchPowerSaveMode();
       for(var x = 0; x < 10; x++) {
-        thermostat.increase();
+        thermostat.increaseTemp();
       }
-      expect(thermostat.colorCheck()).toEqual('red');
+      expect(thermostat.energyUsage()).toEqual('high-usage');
     });
 
-    it("currentColor is green when temp is between 18 and 25", function() {
+    it("energyUsage is 'medium' when temp is between 18 and 25", function() {
       for(var x = 0; x < 2; x++) {
-        thermostat.increase();
+        thermostat.increaseTemp();
       }
-      expect(thermostat.colorCheck()).toEqual('green');
+      expect(thermostat.energyUsage()).toEqual('medium-usage');
     });
   });
 });

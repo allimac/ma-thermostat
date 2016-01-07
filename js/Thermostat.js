@@ -1,41 +1,54 @@
 function Thermostat() {
-  this.temp = 20;
+  this.DEFAULT_TEMP = 20;
   this.MIN_TEMP = 10;
-  this.powerSave = true;
-  this.colorOption = ['blue', 'green', 'red'];
+  this.MAX_TEMP = 32;
+  this.MAX_TEMP_PSM = 25;
+  this.currentMaxTemp = this.MAX_TEMP_PSM;
+  this.currentTemp = this.DEFAULT_TEMP;
+  this.powerSaveMode = true;
 }
 
 Thermostat.prototype.getTemp = function () {
-  return this.temp;
+  return this.currentTemp;
 };
 
-Thermostat.prototype.increase = function () {
-  if (!this.powerSave && this.temp >= 32) throw new Error("Cannot exceed 32 degrees");
-  if (this.powerSave && this.temp >= 25 ) throw new Error("Can't go higher: 25 degrees is the maximum temperature on power save!");
-  this.temp += 1;
-  return this.temp;
+Thermostat.prototype.increaseTemp = function () {
+  if (this.currentTemp >= this.currentMaxTemp) {
+    throw new Error("Cannot exceed "+this.currentMaxTemp+" degrees");
+  }
+  return this.currentTemp += 1;
 };
 
-Thermostat.prototype.decrease = function () {
-  if (this.temp <= this.MIN_TEMP ) throw new Error("Can't go below: 10 degrees is the minimum temperature!");
-  this.temp -= 1;
-  return this.temp;
+Thermostat.prototype.decreaseTemp = function () {
+  if (this.currentTemp <= this.MIN_TEMP ) {
+    throw new Error("Can't go below "+this.MIN_TEMP+" degrees!");
+  }
+  return this.currentTemp -= 1;
 };
 
-Thermostat.prototype.switchMode = function() {
-  this.powerSave = !this.powerSave;
+Thermostat.prototype.switchPowerSaveMode = function() {
+  this.powerSaveMode = !this.powerSaveMode;
+  this.changeMaxTemp();
 };
 
-Thermostat.prototype.reset = function() {
-  this.temp = 20;
+Thermostat.prototype.changeMaxTemp = function () {
+  this.currentMaxTemp = (this.powerSaveMode ? this.MAX_TEMP_PSM : this.MAX_TEMP);
 };
 
-Thermostat.prototype.colorCheck = function() {
-  if (this.temp <= 18) {
-    return this.colorOption[0];
-  } else if (this.temp > 25) {
-    return this.colorOption[2];
+Thermostat.prototype.isPowerSaveModeOn = function() {
+  return (this.powerSaveMode ? true : false);
+};
+
+Thermostat.prototype.resetTemp = function() {
+  this.currentTemp = this.DEFAULT_TEMP;
+};
+
+Thermostat.prototype.energyUsage = function() {
+  if (this.currentTemp <= 18) {
+    return 'low-usage';
+  } else if (this.currentTemp > 25) {
+    return 'high-usage';
   } else {
-    return this.colorOption[1];
+    return 'medium-usage';
   }
 };
