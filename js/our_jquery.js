@@ -1,11 +1,15 @@
 $(document).ready(function() {
   var thermy = new Thermostat();
+  var cityData;
+  var userCity;
 
-  $.get("http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&APPID=08edfb8e9306032dca7e53b61d924bff", function(data) {
-    console.log(data.weather)
-    $( "#outsideTemp" ).text(Math.floor(data.main.temp));
-    $( "#weatherCondition" ).text(data.weather[0].main);
-  });
+    $.getJSON('https://freegeoip.net/json/').done(function(location) {
+      weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q="+ location.city +",uk&units=metric&APPID=08edfb8e9306032dca7e53b61d924bff";
+      $.get(weatherUrl, function(data) {
+        $( "#outsideTemp" ).text(Math.floor(data.main.temp));
+        $( "#weatherCondition" ).text(data.weather[0].main);
+      });
+    });
 
   $("#increaseTemp").click(function() {
     thermy.increaseTemp();
