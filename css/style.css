@@ -11,3 +11,7 @@ h1 {font-size: 2em; font-weight: 600;}
 h2 {font-size: 1.8em;}
 h3 {font-size: 1.6em;}
 h4 {font-size: 1.4em;}
+
+.low-usage { color: green; }
+.medium-usage { color: black; }
+.high-usage { color: red; }

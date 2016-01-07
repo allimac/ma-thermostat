@@ -28,19 +28,18 @@ Thermostat.prototype.decreaseTemp = function () {
 
 Thermostat.prototype.switchPowerSaveMode = function() {
   this.powerSaveMode = !this.powerSaveMode;
-  this.changeMaxTemp();
-};
-
-Thermostat.prototype.changeMaxTemp = function () {
-  this.currentMaxTemp = (this.powerSaveMode ? this.MAX_TEMP_PSM : this.MAX_TEMP);
+  this._changeMaxTemp();
+  if (this.currentTemp > this.currentMaxTemp) {
+    this.resetTemp(this.currentMaxTemp);
+  }
 };
 
 Thermostat.prototype.isPowerSaveModeOn = function() {
   return (this.powerSaveMode ? true : false);
 };
 
-Thermostat.prototype.resetTemp = function() {
-  this.currentTemp = this.DEFAULT_TEMP;
+Thermostat.prototype.resetTemp = function(temp) {
+  this.currentTemp = temp || this.DEFAULT_TEMP;
 };
 
 Thermostat.prototype.energyUsage = function() {
@@ -51,4 +50,8 @@ Thermostat.prototype.energyUsage = function() {
   } else {
     return 'medium-usage';
   }
+};
+
+Thermostat.prototype._changeMaxTemp = function () {
+  this.currentMaxTemp = (this.powerSaveMode ? this.MAX_TEMP_PSM : this.MAX_TEMP);
 };
