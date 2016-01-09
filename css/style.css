@@ -1,17 +1,181 @@
-@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  text-align: center;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {font-size: 2em; font-weight: 600;}
-h2 {font-size: 1.8em;}
-h3 {font-size: 1.6em;}
-h4 {font-size: 1.4em;}
+button {
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-.low-usage { color: green; }
+button:hover {
+  transition: background-color 0.5s ease;
+  transition: color 0.5s ease;
+  transition: border-color 0.5s ease;
+
+}
+
+section#wrapper {
+  width: 900px;
+  margin: 60px auto;
+  position: relative;
+}
+
+/* INSIDE TEMPERATURE */
+section#thermostat {
+  width: 50%;
+  margin-left: 15%;
+  height: 455px;
+  display: inline-block;
+  float: left;
+  background-color: rgba(137, 198, 69, 0.1);
+}
+
+h1 {
+  color: #89C645;
+  text-transform: uppercase;
+  margin-top: 0.3em;
+  margin-bottom: 0.1em;
+  margin-left: -60px;
+  font-size: 3.8em;
+}
+
+h3 {
+  color: #89C645;
+  font-size: 1.6em;
+  font-weight: 400;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-left: -60px;
+}
+
+p#temp {
+  color: #89C645;
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  font-size: 13em;
+  margin-left: -60px;
+}
+
+button#resetTemp {
+  color: #89C645;
+  margin-left: -60px;
+  margin-top: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2em;
+}
+
+button#resetTemp:hover {
+  color: #76A83E;
+  text-decoration: underline;
+}
+
+/* OUTSIDE WEATHER */
+section#weather {
+  color: #4A90E2;
+  width: 25%;
+  margin-left: 5%;
+  margin-top: 40px;
+  display: inline-block;
+  padding-left: 20px;
+  float: left;
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+#outside-text {
+  font-size: 1em;
+  margin-top: -2.5em;
+  margin-bottom: 0.2em;
+  text-transform: uppercase;
+}
+
+#outside {
+  margin: 0.5em 0;
+  font-size: 3em;
+}
+
+button#city-btn {
+  font-size: 1.8em;
+  text-transform: uppercase;
+  color: #4A90E2;
+  background-color: transparent;
+  border: 3px solid transparent;
+  padding: 0px;
+}
+
+button#city-btn:hover {
+  text-decoration: underline;
+}
+
+/* CONTROLS */
+section#controls {
+  width: 35%;
+  height: 190px;
+  position: absolute;
+  margin-left: 75%;
+}
+
+section#controls button {
+  border: 3px solid #89C645;
+}
+
+button#switchPowerSave {
+  text-transform: uppercase;
+  width: 100%;
+  height: 70px;
+  font-size: 1.5em;
+  margin-bottom: 16px;
+  padding: 12px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+button#switchPowerSave.on {
+  background-color: #89C645;
+  color: white;
+}
+
+button#switchPowerSave.off {
+  background-color: white;
+  background-color: rgba(137, 198, 69, 0.2);
+}
+
+button#increaseTemp, button#decreaseTemp {
+  font-size: 4em;
+  width: 47%;
+  height: 110px;
+}
+
+button#increaseTemp {
+  margin-right: 4%;
+  background-color: white;
+  color: #89C645;
+}
+
+button#increaseTemp:hover {
+  color: #76A83E;
+  border-color: #76A83E;
+}
+
+button#decreaseTemp {
+  background-color: #89C645;
+  color: white;
+}
+
+button#decreaseTemp:hover, button#switchPowerSave.on:hover {
+  background-color: #76A83E;
+  border-color: #76A83E;
+}
+
+.low-usage { color: #89C645; }
 .medium-usage { color: black; }
 .high-usage { color: red; }

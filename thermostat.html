@@ -7,28 +7,33 @@
     <script src="js/our_jquery.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/weather-icons/css/weather-icons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Fest</title>
+    <title>Thermy, a better thermostat</title>
   </head>
   <body>
-    <section id="thermostat">
-      <h1>Fest</h1>
-      <h3>The intelligent thermostat</h3>
-      <button type="button" id="increaseTemp">Heat it up!</button>
-      <section id="display">
-        <h1 id='temp'>20</h1>
-        <h4></h4>
+    <section id="wrapper">
+
+      <section id="thermostat">
+        <h1 id="logo">Thermy,</h1>
+        <h3 >a better thermostat.</h3>
+        <p id='temp'>20°</p>
+        <button type="button" id="resetTemp">Reset to 20°</button>
       </section>
-      <button type="button" id="decreaseTemp">Cool it down!</button>
-      <button type="button" id="resetTemp">Reset</button>
-      <button type="button" id="switchPowerSave">Turn powersave off</button>
-    </section>
-    <section id="weather">
-      <h2>Current weather in <span id="city"></span>:</h2>
-      <h3><span id="outsideTemp"></span> C</h3>
-      <h3 id="weatherCondition"></h3>
-      <i class="weather-icon wi wi-day-sunny"></i>
+
+
+      <section id="weather">
+        <p id="outside-text">Outside</p>
+        <button type="button" id="city-btn"><span id="city"></span> <i class="fa fa-angle-down fa-lg"></i></button>
+        <p id="outside" ><span id="outsideTemp"></span>  <i class="weather-icon wi wi-day-sunny"></i></p>
+      </section>
+
+      <section id="controls">
+        <button type="button" id="switchPowerSave" class="on">Eco is on</button>
+        <button type="button" id="increaseTemp"><i class="fa fa-angle-up fa-lg"></i></button>
+        <button type="button" id="decreaseTemp"><i class="fa fa-angle-down fa-lg"></i></button>
+      </section>
     </section>
   </body>
 </html>

@@ -7,7 +7,6 @@ function getLocation(){
   var deferred = $.Deferred();
   $.getJSON('https://freegeoip.net/json/').done(function(location) {
     userCity = location.city;
-  }, function(){
     deferred.resolve();
   });
   return deferred.promise();
@@ -16,8 +15,7 @@ function getLocation(){
 function getWeather(){
   weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q="+ userCity +",uk&units=metric&APPID=08edfb8e9306032dca7e53b61d924bff";
   $.get(weatherUrl, function(data) {
-    $( "#outsideTemp" ).text(Math.floor(data.main.temp));
-    $( "#weatherCondition" ).text(data.weather[0].main);
+    $( "#outsideTemp" ).text(Math.floor(data.main.temp)+"°");
     $("#city").text(userCity);
     });
   }
@@ -43,12 +41,12 @@ function getWeather(){
 
   $("#switchPowerSave").click(function() {
     thermy.switchPowerSaveMode();
-    $( this ).text((thermy.isPowerSaveModeOn() ? "Turn powersave off" : "Turn powersave on"));
+    $( this ).text((thermy.isPowerSaveModeOn() ? "Eco is on" : "Eco is off"));
     updatetemperature();
   });
 
   function updatetemperature() {
-    $( "#temp" ).text(thermy.getTemp());
+    $( "#temp" ).text(thermy.getTemp()+"°");
     $( "#temp" ).attr('class', thermy.energyUsage());
   }
 });
